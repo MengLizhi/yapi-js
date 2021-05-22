@@ -1,23 +1,9 @@
 {
   "yapiConfig": {
-    "url": "http://114.215.198.121:7860/api/open/plugin/export-full?type=json&pid=10&status=all&token=d914fd776df49cdf1000db1050b80b6e9b04992be619f184f9b394a724d07296",
+    "url": "https://yapi.xiaofeituo.com/api/open/plugin/export-full?type=json&pid=7&status=all&token=85028dea54d827c1f2c6c1ddc6fa80d0fece3dfbb593cabe6afa4c2b4d6ccce3",
     "categoryMap": {
-      "用户信息": "Users",
-      "背包": "UsersItems",
-      "会员信息": "UsersVip",
-      "登录": "UsersSession",
-      "退出": "UsersExit",
-      "列表": "UsersGames",
-      "更新排序": "UsersGamesUpdate",
-      "移除游戏": "UsersGamesDelete",
-      "添加游戏": "UsersGamesAdd",
-      "关注用户": "UserFollow",
-      "取消关注": "UserUnFollow",
-      "游戏列表": "GameList",
-      "首页": "GameLibraryHead",
-      "游戏详情": "GameDetail",
-      "人物出招表": "HerosSkills",
-      "游戏⻆⾊资料": "HerosDetail"
+      "房间列表数据获取":"pullHouseList",
+      "编辑/添加房间":"pushHouseInfo"
     }
   },
   "file": {
@@ -25,7 +11,7 @@
     "outurl": "./dist"
   },
   "axios": {
-    "webPath": "http://114.215.198.121:7860/mock/10", 
+    "webPath": "https://yapi.xiaofeituo.com/mock/7", 
     "packageUrl": "../axios"
   }
 }
