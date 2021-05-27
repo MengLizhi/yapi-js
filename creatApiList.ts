@@ -1,8 +1,21 @@
 
-const fs = require('fs')
-const http = require('http')
-const config  = require('./apiconfig.json') 
 
+import * as fs from "fs";
+import * as http from "http";
+import * as https from "https";
+import { URL } from "url";
+import * as config from "./apiconfig.json";
+
+
+interface ParseBodyItem {
+  items?: ParseBodyItem,
+  properties?: {
+    [k:string]:ParseBodyItem
+  }
+  default:string
+  description: string
+  type: string
+}
 
 interface JsonApi {
   "_id": number,
@@ -24,6 +37,7 @@ interface JsonApi {
   "api_opened": boolean,
   "res_body_is_json_schema": boolean,
   "req_body_form": JsonReqBodyForm[],
+  "req_body_other": string
   "req_body_is_json_schema": boolean,
   "req_params": JsonReq[],
   "req_headers": JsonReqHeaders[],
@@ -86,12 +100,19 @@ interface JsonReqBodyForm {
   "example": "",
   "desc": ""
 }
+interface JsonReqBodyOther {
+  "required": string,
+  "name": string,
+  "type": string,
+  "example": string,
+  "desc": string
+}
 interface ReqDescription {
   value: string | 'emty',
   paramsType:string
   desc:string,
   map: {
-    [key:string]: JsonReq | JsonReqHeaders
+    [key:string]: JsonReq | JsonReqHeaders | JsonReqBodyOther
   }
 }
 interface ReqDescriptionHead {
@@ -104,6 +125,8 @@ interface ReqDescriptionHead {
   }[]
 }
 
+
+
 interface ApiParseValue {
   name: string,
   title: string,
@@ -115,6 +138,8 @@ interface ApiParseValue {
     req_query: ReqDescription,
     req_headers: ReqDescriptionHead,
     req_body_form: ReqDescription,
+    req_body_other: ReqDescription,
+    req_body_type: string
   },              
   res_body: JsonSchemaObject
 }
@@ -123,8 +148,13 @@ let apiList:ApiParseValue[] = []
 getYApiList()
 
 function getYApiList() {
-  let url  = config.yapiConfig.url
-  http.get(url, function (res) {
+  let url  = config.yapiConfig.url;
+  let _urlParams = new URL(url);
+  
+  (_urlParams.protocol == 'http:' 
+    ? http
+    : https
+  ).get(url, function (res) {
     let _ctx = ''
     res.on("data", function (data: any) {
         _ctx = _ctx + data
@@ -144,12 +174,14 @@ function startParse(jsonApiList: JsonApiList[]) {
     jsonApiList.forEach((api) => {
       api.list.forEach((item) => {
         let apiname =''
-        let _title:string = config.yapiConfig.categoryMap[item.title]
+        let _map:{[key:string]:string}= config.yapiConfig.categoryMap
+        let _title:string = _map[item.title]
         let _flag = new RegExp(/([A-Z]|[a-z])/);
         if ( _title || _flag.test(item.title)) {
           let jsonApi = item
           apiname = _flag.test(item.title) ? item.title : _title
           if(jsonApi.res_body) {
+            parseBodyOther(item.req_body_other)
             let model = (<JsonSchemaObject> JSON.parse(jsonApi.res_body))
             apiList.push({
               name: apiname,
@@ -162,6 +194,8 @@ function startParse(jsonApiList: JsonApiList[]) {
                 req_query: parseParams(item.req_query, 'query'),
                 req_headers: parseHeaders(item.req_headers),
                 req_body_form: parseBodyForm(item.req_body_form),
+                req_body_other: parseBodyOther(item.req_body_other),
+                req_body_type: item.res_body_type
               },              
               res_body: model
             })
@@ -186,9 +220,12 @@ function creatApiListJS(apiList:ApiParseValue[]) {
   })
   let output = `
     import api from "${ config.axios.packageUrl }";
-    const host = \`\$\{ \(process.env.isMock ? process.env.mockUrl : 
-                            process.env.isProxy && !process.server ? process.env.proxyPath :
-                              process.env.backServerUrl
+    const host = \`\$\{ \(      
+      import.meta.env.VITE_isMock === 'true'
+        ? import.meta.env.VITE_mockUrl 
+        : import.meta.env.VITE_isProxy === 'true'
+            ? import.meta.env.VITE_proxyPath 
+            : import.meta.env.VITE_backServerUrl
       \)\}\`
     ${_apiListText}
 
@@ -222,6 +259,7 @@ function creatApi(api:ApiParseValue) {
     ${api.req.req_query.value !== 'emty' ? 'req_query,' : ''}
     
     ${api.req.req_body_form.value !== 'emty' ? 'req_body_form,' : ''}
+    ${api.req.req_body_other.value !== 'emty' ? 'req_body_other,' : ''}
     ${api.req.req_params.value !== 'emty' ? 'req_params,' : ''}
   }`
   
@@ -233,7 +271,14 @@ function creatApi(api:ApiParseValue) {
     } else {
       return `
         params: ${api.req.req_query.value !== 'emty' ? 'req_query,' : '{},'}
-        data: ${api.req.req_body_form.value !== 'emty' ? 'req_body_form,' : '{}'}
+        data: {
+          ${api.req.req_body_form.value !== 'emty' 
+                ? '...req_body_form,' 
+                : ''}
+          ${api.req.req_body_other.value !== 'emty' 
+                ? '...req_body_other,'
+                : ''}
+        }
       `
     }
   } 
@@ -241,7 +286,7 @@ function creatApi(api:ApiParseValue) {
     let _newUrl = url;
     let _target = _newUrl.match(/:([A-Z]|[a-z])+\//g)
     Object.keys(paramsMap).forEach((tag)=>{
-      _target.forEach((params)=>{
+      _target?.forEach((params)=>{
         _newUrl = _newUrl.replace(params, `\$\{req_params.${tag}\}/`)
       })
     })
@@ -320,6 +365,9 @@ function creatApiFuncDts(api:ApiParseValue) {
       ${
         ifReqDescription(api.req.req_body_form, "req_body_form")
       }
+      ${
+        ifReqDescription(api.req.req_body_other, "req_body_other")
+      }
     }):${
         
         parseResBody(api.res_body)
@@ -350,12 +398,12 @@ function creatFile(fileName: string, fileType: 'js' | 'dts', content: string) {
  * 解析请求参数
  * @param params 参数
  */
-function parseParams(params:JsonReq[], type:string) {
+function parseParams(params:JsonReq[], type:string):ReqDescription {
 
   let _paramsType = ''
   let _desc = ''
   let _value = params.length === 0 ? 'emty' : ''
-  let _map = {}
+  let _map:{[k:string]:JsonReq} = {}
   params.forEach((item)=>{
     _value += `${item.name},\n`
     _map[`${item.name}`] = item
@@ -377,7 +425,7 @@ function parseParams(params:JsonReq[], type:string) {
  * 解析请求头
  * @param params 
  */
-function parseHeaders(params:JsonReqHeaders[]) {
+function parseHeaders(params:JsonReqHeaders[]):ReqDescriptionHead {
   let _paramsType = ''
   let _desc = ''
   let _value = params.length === 0 ? 'emty' : ''
@@ -410,7 +458,7 @@ function parseBodyForm(params:JsonReqBodyForm[]) {
   let _paramsType = ''
   let _desc = ''
   let _value = params.length === 0 ? 'emty' : ''
-  let _map = {}
+  let _map:{[K:string]:JsonReqBodyForm} = {}
   let switchType = (type:string) => {
     if(type === 'text') {
       return 'string'
@@ -419,15 +467,80 @@ function parseBodyForm(params:JsonReqBodyForm[]) {
     }
   }
   params.forEach((item)=>{
-    _value += `${item.name},\n`
-    _map[`${item.name}`] = item    
-    _paramsType += item.required === '1' ? `${item.name}:${switchType(item.type)},`: `${item.name}?:${switchType(item.type)},`
-    _desc += `* @param headers.${item.name} ${item.desc}\n`
+    _value += `${item.name},\n` //参数名称合集（字符串）
+    _map[`${item.name}`] = item   //  参数类型合集
+    _paramsType += item.required === '1' // 参数类型合集(字符串)
+                      ? `${item.name}:${switchType(item.type)},`
+                      : `${item.name}?:${switchType(item.type)},`
+    _desc += `* @param headers.${item.name} ${item.desc}\n` // 参数说明文本合集
   })
 
   let _obj= {
     value: _value,
     map: _map,    
+    paramsType: _paramsType,
+    desc: _desc
+  }
+  
+  return _obj
+}
+function parseBodyOther(params:string) {
+  let _json = params 
+                ? (JSON.parse(params) as {
+                  example:any,
+                  properties: {
+                    [k:string]:ParseBodyItem
+                  }})
+                : undefined;
+  
+  let _paramsType = ''
+  let _desc = ''
+  let _value = _json ? 'emty' : ''
+  let _name = ''
+  let _map:{[K:string]:JsonReqBodyOther} = {}
+  let switchType = (item:ParseBodyItem):string => {
+    switch (item.type) {
+      // TODO: 构建嵌套类型，来适应 test:{asd:123} 和 test:API[]
+      case 'object':
+        return item.properties ?`{ ${(()=>{
+          let _key = ''
+          Object.keys(item.properties).forEach((key)=>{
+            _key += `${key}:${switchType(item.properties![key])} \n`
+          })
+          return _key
+        })()} }`: `any`
+      case 'array':
+        return item.items ? `${switchType(item.items)}[]` : `any[]`
+      case 'integer':
+        return 'number'
+      default:
+        return item.type
+    }
+  }
+
+  if (_json && _json['properties']) {
+    let _properties = _json['properties']
+    Object.keys(_properties).forEach((key)=>{
+      _value += `${key},\n` //参数名称合集（字符串）
+      _map[`${key}`] = {
+        required: "0",
+        name: key,
+        type: _properties[key].type,
+        example: _properties[key].default,
+        desc: _properties[key].description
+      }   
+      //  参数类型合集
+      _paramsType += _map[`${key}`].required === '1' // 参数类型合集(字符串)
+                        ? `${key}:${switchType(_properties[key])},`
+                        : `${key}?:${switchType(_properties[key])},`
+      _desc += `* @param headers.${key} ${_properties[key].description}\n` // 参数说明文本合集
+    })
+  }
+  
+
+  let _obj= {
+    value: _value,
+    map: _map,
     paramsType: _paramsType,
     desc: _desc
   }
