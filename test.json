@@ -1,0 +1,2732 @@
+[
+  {
+    "name": "postCorpUserAuthFindback",
+    "title": "企业用户找回密码",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/auth/findback",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtycaptchaCode,\ncaptchaId,\nemail,\nmobile,\nmobilePrefix,\nverifyCode,\n",
+        "map": {
+          "captchaCode": {
+            "required": "0",
+            "name": "captchaCode",
+            "type": "string",
+            "desc": "图片校验码（用户输入）"
+          },
+          "captchaId": {
+            "required": "0",
+            "name": "captchaId",
+            "type": "string",
+            "desc": "图片校验码申请时返回的ID，非用户输入"
+          },
+          "email": {
+            "required": "0",
+            "name": "email",
+            "type": "string",
+            "desc": "邮件"
+          },
+          "mobile": {
+            "required": "0",
+            "name": "mobile",
+            "type": "string",
+            "desc": "手机号，不包含前缀"
+          },
+          "mobilePrefix": {
+            "required": "0",
+            "name": "mobilePrefix",
+            "type": "string",
+            "desc": "手机区号前缀"
+          },
+          "verifyCode": {
+            "required": "0",
+            "name": "verifyCode",
+            "type": "string",
+            "desc": "动态效验码"
+          }
+        },
+        "paramsType": "captchaCode?:string,captchaId?:string,email?:string,mobile?:string,mobilePrefix?:string,verifyCode?:string,",
+        "desc": "* @param headers.captchaCode 图片校验码（用户输入）\n* @param headers.captchaId 图片校验码申请时返回的ID，非用户输入\n* @param headers.email 邮件\n* @param headers.mobile 手机号，不包含前缀\n* @param headers.mobilePrefix 手机区号前缀\n* @param headers.verifyCode 动态效验码\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserAuthRegister",
+    "title": "注册企业用户",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/auth/register",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyaccount,\navatar,\ncaptchaCode,\ncaptchaId,\nemail,\nmobile,\nmobilePrefix,\nname,\npassword,\nroleIds,\nteamId,\nverifyCode,\n",
+        "map": {
+          "account": {
+            "required": "0",
+            "name": "account",
+            "type": "string",
+            "desc": "企业用户登录帐号"
+          },
+          "avatar": {
+            "required": "0",
+            "name": "avatar",
+            "type": "string",
+            "desc": "头像URL"
+          },
+          "captchaCode": {
+            "required": "0",
+            "name": "captchaCode",
+            "type": "string",
+            "desc": "图片校验码（用户输入）"
+          },
+          "captchaId": {
+            "required": "0",
+            "name": "captchaId",
+            "type": "string",
+            "desc": "图片校验码申请时返回的ID，非用户输入"
+          },
+          "email": {
+            "required": "0",
+            "name": "email",
+            "type": "string",
+            "desc": "邮件"
+          },
+          "mobile": {
+            "required": "0",
+            "name": "mobile",
+            "type": "string",
+            "desc": "手机号，不包含前缀"
+          },
+          "mobilePrefix": {
+            "required": "0",
+            "name": "mobilePrefix",
+            "type": "string",
+            "desc": "手机区号前缀"
+          },
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "企业用户姓名"
+          },
+          "password": {
+            "required": "0",
+            "name": "password",
+            "type": "string",
+            "desc": "管理员登录密码"
+          },
+          "roleIds": {
+            "required": "0",
+            "name": "roleIds",
+            "type": "string",
+            "desc": "角色信息, JSON Array String: [1,2,3]"
+          },
+          "teamId": {
+            "required": "0",
+            "name": "teamId",
+            "type": "string",
+            "desc": "工作组ID"
+          },
+          "verifyCode": {
+            "required": "0",
+            "name": "verifyCode",
+            "type": "string",
+            "desc": "动态效验码"
+          }
+        },
+        "paramsType": "account?:string,avatar?:string,captchaCode?:string,captchaId?:string,email?:string,mobile?:string,mobilePrefix?:string,name?:string,password?:string,roleIds?:string,teamId?:string,verifyCode?:string,",
+        "desc": "* @param headers.account 企业用户登录帐号\n* @param headers.avatar 头像URL\n* @param headers.captchaCode 图片校验码（用户输入）\n* @param headers.captchaId 图片校验码申请时返回的ID，非用户输入\n* @param headers.email 邮件\n* @param headers.mobile 手机号，不包含前缀\n* @param headers.mobilePrefix 手机区号前缀\n* @param headers.name 企业用户姓名\n* @param headers.password 管理员登录密码\n* @param headers.roleIds 角色信息, JSON Array String: [1,2,3]\n* @param headers.teamId 工作组ID\n* @param headers.verifyCode 动态效验码\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserAuthLogout",
+    "title": "退出登录",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/auth/logout",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserAuthLogin",
+    "title": "通过账号密码登录",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/auth/login",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyaccount,\npassword,\n",
+        "map": {
+          "account": {
+            "required": "0",
+            "name": "account",
+            "type": "string",
+            "desc": "企业用户登录账号"
+          },
+          "password": {
+            "required": "0",
+            "name": "password",
+            "type": "string",
+            "desc": "企业用户登录密码"
+          }
+        },
+        "paramsType": "account?:string,password?:string,",
+        "desc": "* @param headers.account 企业用户登录账号\n* @param headers.password 企业用户登录密码\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "accessToken": {
+              "type": "string",
+              "description": "访问token"
+            },
+            "accessTokenExpireInSeconds": {
+              "type": "integer",
+              "format": "int64",
+              "description": "accessToken有效时长，单位（秒）"
+            },
+            "avatar": {
+              "type": "string",
+              "description": "用户头像，URL链接"
+            },
+            "corpId": {
+              "type": "string",
+              "description": "所属企业ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "用户姓名"
+            },
+            "userId": {
+              "type": "string",
+              "description": "用户ID"
+            }
+          },
+          "title": "企业用户登录返回信息",
+          "$$ref": "#/definitions/企业用户登录返回信息"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«企业用户登录返回信息»",
+      "$$ref": "#/definitions/响应结果数据«企业用户登录返回信息»"
+    }
+  },
+  {
+    "name": "postCorpUserCaptchaRequest",
+    "title": "请求图形校验码",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/captcha/request",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyts,\n",
+        "map": {
+          "ts": {
+            "required": "0",
+            "name": "ts",
+            "type": "integer",
+            "desc": "时间戳，单位：毫秒"
+          }
+        },
+        "paramsType": "ts?:number,",
+        "desc": "* @param headers.ts 时间戳，单位：毫秒\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "dataUrl": {
+              "type": "string",
+              "description": "base64 编码形式的图片数据"
+            },
+            "id": {
+              "type": "string",
+              "description": "图形校验码的ID,后续需要传递给服务"
+            },
+            "ts": {
+              "type": "integer",
+              "format": "int64",
+              "description": "时间戳，单位：毫秒"
+            }
+          },
+          "title": "企业用户图形校验码返回数据",
+          "$$ref": "#/definitions/企业用户图形校验码返回数据"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«企业用户图形校验码返回数据»",
+      "$$ref": "#/definitions/响应结果数据«企业用户图形校验码返回数据»"
+    }
+  },
+  {
+    "name": "postCorpUserDelete",
+    "title": "删除管理员",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/delete",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "corpUserId,\n",
+        "map": {
+          "corpUserId": {
+            "required": "1",
+            "_id": "60b747fa35407e1ae4be5877",
+            "name": "corpUserId",
+            "desc": "corpUserId"
+          }
+        },
+        "paramsType": "corpUserId:string,",
+        "desc": "* @param query.corpUserId corpUserId\n"
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserList",
+    "title": "查询企业用户列表",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/list",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyorder,\npageNo,\npageSize,\nsort,\nusername,\n",
+        "map": {
+          "order": {
+            "required": "0",
+            "name": "order",
+            "type": "string",
+            "desc": "排序方式, 例如: asc/desc"
+          },
+          "pageNo": {
+            "required": "0",
+            "name": "pageNo",
+            "type": "integer",
+            "desc": "第几页, 从1开始"
+          },
+          "pageSize": {
+            "required": "0",
+            "name": "pageSize",
+            "type": "integer",
+            "desc": "每页数量每页数量(1 ~ 1000)"
+          },
+          "sort": {
+            "required": "0",
+            "name": "sort",
+            "type": "string",
+            "desc": "排序字段, 例如: add_time"
+          },
+          "username": {
+            "required": "0",
+            "name": "username",
+            "type": "string",
+            "desc": "企业用户帐号"
+          }
+        },
+        "paramsType": "order?:string,pageNo?:number,pageSize?:number,sort?:string,username?:string,",
+        "desc": "* @param headers.order 排序方式, 例如: asc/desc\n* @param headers.pageNo 第几页, 从1开始\n* @param headers.pageSize 每页数量每页数量(1 ~ 1000)\n* @param headers.sort 排序字段, 例如: add_time\n* @param headers.username 企业用户帐号\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "pageNo": {
+              "type": "integer",
+              "format": "int32",
+              "description": "第几页"
+            },
+            "pageSize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "每页条数"
+            },
+            "rainbow": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "rows": {
+              "type": "array",
+              "description": "结果集",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "account": {
+                    "type": "string",
+                    "description": "登录帐号，字母数字组合"
+                  },
+                  "addTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "添加时间"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "description": "头像地址"
+                  },
+                  "corpId": {
+                    "type": "string",
+                    "description": "所属公司"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "邮箱"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "是否启用：0 - 未启用，1 - 启用"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "企业用户ID"
+                  },
+                  "isAdmin": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否为管理员：0 - 否， 1 - 是"
+                  },
+                  "lastLoginIp": {
+                    "type": "string",
+                    "description": "最近一次登录IP地址"
+                  },
+                  "lastLoginTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最近一次登录时间"
+                  },
+                  "loginProtect": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "登录保护：0 - 关闭， 1 - 手机验证码， 2 - 邮件验证码"
+                  },
+                  "mobile": {
+                    "type": "string",
+                    "description": "手机号码，不带区域号"
+                  },
+                  "mobilePrefix": {
+                    "type": "string",
+                    "description": " 手机前缀：+86"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "用户姓名"
+                  },
+                  "teamId": {
+                    "type": "string",
+                    "description": "分组ID"
+                  },
+                  "teamName": {
+                    "type": "string",
+                    "description": "分组名称，如: 系统工作组/运维/维护"
+                  },
+                  "updateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "更新时间"
+                  }
+                },
+                "title": "企业用户列表查询项目",
+                "$$ref": "#/definitions/企业用户列表查询项目"
+              }
+            },
+            "totalPage": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总页数"
+            },
+            "totalRows": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总记录数"
+            }
+          },
+          "title": "PageResult«企业用户列表查询项目»",
+          "$$ref": "#/definitions/PageResult«企业用户列表查询项目»"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«PageResult«企业用户列表查询项目»»",
+      "$$ref": "#/definitions/响应结果数据«PageResult«企业用户列表查询项目»»"
+    }
+  },
+  {
+    "name": "postCorpUserCreate",
+    "title": "添加企业用户",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/create",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyaccount,\navatar,\ncorpId,\nemail,\nmobile,\nmobilePrefix,\nname,\npassword,\nroleIds,\nteamId,\n",
+        "map": {
+          "account": {
+            "required": "0",
+            "name": "account",
+            "type": "string",
+            "desc": "企业用户登录帐号"
+          },
+          "avatar": {
+            "required": "0",
+            "name": "avatar",
+            "type": "string",
+            "desc": "头像URL"
+          },
+          "corpId": {
+            "required": "0",
+            "name": "corpId",
+            "type": "string",
+            "desc": "企业所属企业ID"
+          },
+          "email": {
+            "required": "0",
+            "name": "email",
+            "type": "string",
+            "desc": "邮件"
+          },
+          "mobile": {
+            "required": "0",
+            "name": "mobile",
+            "type": "string",
+            "desc": "手机号，不包含前缀"
+          },
+          "mobilePrefix": {
+            "required": "0",
+            "name": "mobilePrefix",
+            "type": "string",
+            "desc": "手机区号前缀"
+          },
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "企业用户姓名"
+          },
+          "password": {
+            "required": "0",
+            "name": "password",
+            "type": "string",
+            "desc": "管理员登录密码"
+          },
+          "roleIds": {
+            "required": "0",
+            "name": "roleIds",
+            "type": "string",
+            "desc": "角色信息, JSON Array String: [1,2,3]"
+          },
+          "teamId": {
+            "required": "0",
+            "name": "teamId",
+            "type": "string",
+            "desc": "工作组ID"
+          }
+        },
+        "paramsType": "account?:string,avatar?:string,corpId?:string,email?:string,mobile?:string,mobilePrefix?:string,name?:string,password?:string,roleIds?:string,teamId?:string,",
+        "desc": "* @param headers.account 企业用户登录帐号\n* @param headers.avatar 头像URL\n* @param headers.corpId 企业所属企业ID\n* @param headers.email 邮件\n* @param headers.mobile 手机号，不包含前缀\n* @param headers.mobilePrefix 手机区号前缀\n* @param headers.name 企业用户姓名\n* @param headers.password 管理员登录密码\n* @param headers.roleIds 角色信息, JSON Array String: [1,2,3]\n* @param headers.teamId 工作组ID\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserUpdate",
+    "title": "编辑用户",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/update",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyavatar,\nemail,\nenabled,\nid,\nloginProtect,\nmobile,\nmobilePrefix,\nname,\nteamId,\n",
+        "map": {
+          "avatar": {
+            "required": "0",
+            "name": "avatar",
+            "type": "string",
+            "desc": "头像地址"
+          },
+          "email": {
+            "required": "0",
+            "name": "email",
+            "type": "string",
+            "desc": "邮箱"
+          },
+          "enabled": {
+            "required": "0",
+            "name": "enabled",
+            "type": "boolean",
+            "desc": "是否启用：0 - 未启用，1 - 启用"
+          },
+          "id": {
+            "required": "0",
+            "name": "id",
+            "type": "string",
+            "desc": "企业用户ID"
+          },
+          "loginProtect": {
+            "required": "0",
+            "name": "loginProtect",
+            "type": "integer",
+            "desc": "登录保护：0 - 关闭， 1 - 手机验证码， 2 - 邮件验证码"
+          },
+          "mobile": {
+            "required": "0",
+            "name": "mobile",
+            "type": "string",
+            "desc": "手机号码，不带区域号"
+          },
+          "mobilePrefix": {
+            "required": "0",
+            "name": "mobilePrefix",
+            "type": "string",
+            "desc": " 手机前缀：+86"
+          },
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "用户姓名"
+          },
+          "teamId": {
+            "required": "0",
+            "name": "teamId",
+            "type": "string",
+            "desc": "分组ID"
+          }
+        },
+        "paramsType": "avatar?:string,email?:string,enabled?:boolean,id?:string,loginProtect?:number,mobile?:string,mobilePrefix?:string,name?:string,teamId?:string,",
+        "desc": "* @param headers.avatar 头像地址\n* @param headers.email 邮箱\n* @param headers.enabled 是否启用：0 - 未启用，1 - 启用\n* @param headers.id 企业用户ID\n* @param headers.loginProtect 登录保护：0 - 关闭， 1 - 手机验证码， 2 - 邮件验证码\n* @param headers.mobile 手机号码，不带区域号\n* @param headers.mobilePrefix  手机前缀：+86\n* @param headers.name 用户姓名\n* @param headers.teamId 分组ID\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "getCorpUserRolePermissions",
+    "title": "获取角色权限",
+    "method": "GET",
+    "query_path": "/mc-api/v2/corp/user/role/permissions",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "roleId,\n",
+        "map": {
+          "roleId": {
+            "required": "1",
+            "_id": "60b747fa35407e5825be5883",
+            "name": "roleId",
+            "desc": "roleId"
+          }
+        },
+        "paramsType": "roleId:string,",
+        "desc": "* @param query.roleId roleId\n"
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"token\":string,",
+        "desc": "* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "assignedPermissions": {
+              "type": "array",
+              "description": "已拥有的权限",
+              "items": {
+                "type": "string"
+              }
+            },
+            "roleId": {
+              "type": "integer",
+              "format": "int32",
+              "description": "角色Id"
+            },
+            "systemPermissions": {
+              "type": "object",
+              "description": "系统权限树形列表",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "title": "指定角色的权限信息",
+          "$$ref": "#/definitions/指定角色的权限信息"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«指定角色的权限信息»",
+      "$$ref": "#/definitions/响应结果数据«指定角色的权限信息»"
+    }
+  },
+  {
+    "name": "postCorpUserRolePermissions",
+    "title": "设置角色权限",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/role/permissions",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtycorpId,\npermissions,\nroleId,\n",
+        "map": {
+          "corpId": {
+            "required": "0",
+            "name": "corpId",
+            "type": "string",
+            "desc": "企业Id"
+          },
+          "permissions": {
+            "required": "0",
+            "name": "permissions",
+            "type": "array",
+            "desc": "角色拥有的权限列表"
+          },
+          "roleId": {
+            "required": "0",
+            "name": "roleId",
+            "type": "string",
+            "desc": "角色Id"
+          }
+        },
+        "paramsType": "corpId?:string,permissions?:string[],roleId?:string,",
+        "desc": "* @param headers.corpId 企业Id\n* @param headers.permissions 角色拥有的权限列表\n* @param headers.roleId 角色Id\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserRoleDelete",
+    "title": "删除企业用户角色",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/role/delete",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "corpRoleId,\n",
+        "map": {
+          "corpRoleId": {
+            "required": "1",
+            "_id": "60b747fa35407e7a72be587e",
+            "name": "corpRoleId",
+            "desc": "corpRoleId"
+          }
+        },
+        "paramsType": "corpRoleId:string,",
+        "desc": "* @param query.corpRoleId corpRoleId\n"
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserRoleList",
+    "title": "查询企业用户角色列表",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/role/list",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyname,\norder,\npageNo,\npageSize,\nsort,\n",
+        "map": {
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "角色名称"
+          },
+          "order": {
+            "required": "0",
+            "name": "order",
+            "type": "string",
+            "desc": "排序方式, 例如: asc/desc"
+          },
+          "pageNo": {
+            "required": "0",
+            "name": "pageNo",
+            "type": "integer",
+            "desc": "第几页, 从1开始"
+          },
+          "pageSize": {
+            "required": "0",
+            "name": "pageSize",
+            "type": "integer",
+            "desc": "每页数量每页数量(1 ~ 1000)"
+          },
+          "sort": {
+            "required": "0",
+            "name": "sort",
+            "type": "string",
+            "desc": "排序字段, 例如: add_time"
+          }
+        },
+        "paramsType": "name?:string,order?:string,pageNo?:number,pageSize?:number,sort?:string,",
+        "desc": "* @param headers.name 角色名称\n* @param headers.order 排序方式, 例如: asc/desc\n* @param headers.pageNo 第几页, 从1开始\n* @param headers.pageSize 每页数量每页数量(1 ~ 1000)\n* @param headers.sort 排序字段, 例如: add_time\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "pageNo": {
+              "type": "integer",
+              "format": "int32",
+              "description": "第几页"
+            },
+            "pageSize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "每页条数"
+            },
+            "rainbow": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "rows": {
+              "type": "array",
+              "description": "结果集",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "addTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                  },
+                  "corpId": {
+                    "type": "string",
+                    "description": "所属公司"
+                  },
+                  "deleted": {
+                    "type": "boolean",
+                    "description": "逻辑删除"
+                  },
+                  "detail": {
+                    "type": "string",
+                    "description": "角色描述"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "是否启用"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "角色名称"
+                  },
+                  "updateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "更新时间"
+                  }
+                },
+                "title": "企业用户角色列表信息",
+                "$$ref": "#/definitions/企业用户角色列表信息"
+              }
+            },
+            "totalPage": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总页数"
+            },
+            "totalRows": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总记录数"
+            }
+          },
+          "title": "PageResult«企业用户角色列表信息»",
+          "$$ref": "#/definitions/PageResult«企业用户角色列表信息»"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«PageResult«企业用户角色列表信息»»",
+      "$$ref": "#/definitions/响应结果数据«PageResult«企业用户角色列表信息»»"
+    }
+  },
+  {
+    "name": "postCorpUserRoleCreate",
+    "title": "添加企业用户角色",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/role/create",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtydetail,\nname,\n",
+        "map": {
+          "detail": {
+            "required": "0",
+            "name": "detail",
+            "type": "string",
+            "desc": "角色描述"
+          },
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "角色名称"
+          }
+        },
+        "paramsType": "detail?:string,name?:string,",
+        "desc": "* @param headers.detail 角色描述\n* @param headers.name 角色名称\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpUserRoleUpdate",
+    "title": "编辑用户角色",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/role/update",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtydetail,\nid,\nname,\n",
+        "map": {
+          "detail": {
+            "required": "0",
+            "name": "detail",
+            "type": "string",
+            "desc": "角色描述"
+          },
+          "id": {
+            "required": "0",
+            "name": "id",
+            "type": "string",
+            "desc": "企业角色ID"
+          },
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "角色名称"
+          }
+        },
+        "paramsType": "detail?:string,id?:string,name?:string,",
+        "desc": "* @param headers.detail 角色描述\n* @param headers.id 企业角色ID\n* @param headers.name 角色名称\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "getCorpUserRoleOptions",
+    "title": "角色列表格式化查询",
+    "method": "GET",
+    "query_path": "/mc-api/v2/corp/user/role/options",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"token\":string,",
+        "desc": "* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "pageNo": {
+              "type": "integer",
+              "format": "int32",
+              "description": "第几页"
+            },
+            "pageSize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "每页条数"
+            },
+            "rainbow": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "rows": {
+              "type": "array",
+              "description": "结果集",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "description": "标签， 角色名称"
+                  },
+                  "value": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "值， 角色编号"
+                  }
+                },
+                "title": "角色格式化查询返回",
+                "$$ref": "#/definitions/角色格式化查询返回"
+              }
+            },
+            "totalPage": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总页数"
+            },
+            "totalRows": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总记录数"
+            }
+          },
+          "title": "PageResult«角色格式化查询返回»",
+          "$$ref": "#/definitions/PageResult«角色格式化查询返回»"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«PageResult«角色格式化查询返回»»",
+      "$$ref": "#/definitions/响应结果数据«PageResult«角色格式化查询返回»»"
+    }
+  },
+  {
+    "name": "postCorpUserVerifycodeRequest",
+    "title": "请求系统通过手机/邮件获取验证码",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/user/verify-code/request",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyemail,\nmethod,\nmobile,\nmobilePrefix,\npurpose,\nts,\n",
+        "map": {
+          "email": {
+            "required": "0",
+            "name": "email",
+            "type": "string",
+            "desc": "邮件地址, 如: xxxx@xxx.com"
+          },
+          "method": {
+            "required": "0",
+            "name": "method",
+            "type": "integer",
+            "desc": "获取方式: 0 - 手机, 1 - email"
+          },
+          "mobile": {
+            "required": "0",
+            "name": "mobile",
+            "type": "string",
+            "desc": "手机号码，不带区号前缀, 如: 159893xx159"
+          },
+          "mobilePrefix": {
+            "required": "0",
+            "name": "mobilePrefix",
+            "type": "string",
+            "desc": "手机区号前缀，如: 0086"
+          },
+          "purpose": {
+            "required": "0",
+            "name": "purpose",
+            "type": "integer",
+            "desc": "用途: 1 - 企业用户注册， 2 - 企业用户找回密码, 3 - 企业用户绑定"
+          },
+          "ts": {
+            "required": "0",
+            "name": "ts",
+            "type": "integer",
+            "desc": "时间戳"
+          }
+        },
+        "paramsType": "email?:string,method?:number,mobile?:string,mobilePrefix?:string,purpose?:number,ts?:number,",
+        "desc": "* @param headers.email 邮件地址, 如: xxxx@xxx.com\n* @param headers.method 获取方式: 0 - 手机, 1 - email\n* @param headers.mobile 手机号码，不带区号前缀, 如: 159893xx159\n* @param headers.mobilePrefix 手机区号前缀，如: 0086\n* @param headers.purpose 用途: 1 - 企业用户注册， 2 - 企业用户找回密码, 3 - 企业用户绑定\n* @param headers.ts 时间戳\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpCreate",
+    "title": "添加企业",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/create",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtycategory,\ncontractAddr,\ncontractEmail,\ncontractLeader,\ncontractTel,\nlicenses,\nlogo,\nname,\notherCategory,\n",
+        "map": {
+          "category": {
+            "required": "0",
+            "name": "category",
+            "type": "string",
+            "desc": "所属行业，如: 政企、社区物业、广告传媒、房地产开发、银行、医疗、零售、旅游、交通运输、公益组织、其他"
+          },
+          "contractAddr": {
+            "required": "0",
+            "name": "contractAddr",
+            "type": "string",
+            "desc": "联系地址"
+          },
+          "contractEmail": {
+            "required": "0",
+            "name": "contractEmail",
+            "type": "string",
+            "desc": "企业联系邮件"
+          },
+          "contractLeader": {
+            "required": "0",
+            "name": "contractLeader",
+            "type": "string",
+            "desc": "公司负责人"
+          },
+          "contractTel": {
+            "required": "0",
+            "name": "contractTel",
+            "type": "string",
+            "desc": "企业联系电话"
+          },
+          "licenses": {
+            "required": "0",
+            "name": "licenses",
+            "type": "string",
+            "desc": "证书链接，多个以逗号分割"
+          },
+          "logo": {
+            "required": "0",
+            "name": "logo",
+            "type": "string",
+            "desc": "企业logo"
+          },
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "公司名称"
+          },
+          "otherCategory": {
+            "required": "0",
+            "name": "otherCategory",
+            "type": "string",
+            "desc": "所属行业为 '其他' 时用户填写信息， 0 - 128个字符"
+          }
+        },
+        "paramsType": "category?:string,contractAddr?:string,contractEmail?:string,contractLeader?:string,contractTel?:string,licenses?:string,logo?:string,name?:string,otherCategory?:string,",
+        "desc": "* @param headers.category 所属行业，如: 政企、社区物业、广告传媒、房地产开发、银行、医疗、零售、旅游、交通运输、公益组织、其他\n* @param headers.contractAddr 联系地址\n* @param headers.contractEmail 企业联系邮件\n* @param headers.contractLeader 公司负责人\n* @param headers.contractTel 企业联系电话\n* @param headers.licenses 证书链接，多个以逗号分割\n* @param headers.logo 企业logo\n* @param headers.name 公司名称\n* @param headers.otherCategory 所属行业为 '其他' 时用户填写信息， 0 - 128个字符\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpDelete",
+    "title": "删除企业",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/delete",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "corpId,\n",
+        "map": {
+          "corpId": {
+            "required": "1",
+            "_id": "60b747f935407ec97dbe5864",
+            "name": "corpId",
+            "desc": "corpId"
+          }
+        },
+        "paramsType": "corpId:string,",
+        "desc": "* @param query.corpId corpId\n"
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postCorpList",
+    "title": "查询企业列表",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/list",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyorder,\npageNo,\npageSize,\nsort,\nusername,\n",
+        "map": {
+          "order": {
+            "required": "0",
+            "name": "order",
+            "type": "string",
+            "desc": "排序方式, 例如: asc/desc"
+          },
+          "pageNo": {
+            "required": "0",
+            "name": "pageNo",
+            "type": "integer",
+            "desc": "第几页, 从1开始"
+          },
+          "pageSize": {
+            "required": "0",
+            "name": "pageSize",
+            "type": "integer",
+            "desc": "每页数量每页数量(1 ~ 1000)"
+          },
+          "sort": {
+            "required": "0",
+            "name": "sort",
+            "type": "string",
+            "desc": "排序字段, 例如: add_time"
+          },
+          "username": {
+            "required": "0",
+            "name": "username",
+            "type": "string",
+            "desc": "企业用户帐号"
+          }
+        },
+        "paramsType": "order?:string,pageNo?:number,pageSize?:number,sort?:string,username?:string,",
+        "desc": "* @param headers.order 排序方式, 例如: asc/desc\n* @param headers.pageNo 第几页, 从1开始\n* @param headers.pageSize 每页数量每页数量(1 ~ 1000)\n* @param headers.sort 排序字段, 例如: add_time\n* @param headers.username 企业用户帐号\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "pageNo": {
+              "type": "integer",
+              "format": "int32",
+              "description": "第几页"
+            },
+            "pageSize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "每页条数"
+            },
+            "rainbow": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "rows": {
+              "type": "array",
+              "description": "结果集",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "addTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "添加时间"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "所属行业，如: 政企、社区物业、广告传媒、房地产开发、银行、医疗、零售、旅游、交通运输、公益组织、其他"
+                  },
+                  "contractAddr": {
+                    "type": "string",
+                    "description": "联系地址"
+                  },
+                  "contractEmail": {
+                    "type": "string",
+                    "description": "企业联系邮件"
+                  },
+                  "contractLeader": {
+                    "type": "string",
+                    "description": "公司负责人"
+                  },
+                  "contractTel": {
+                    "type": "string",
+                    "description": "企业联系电话"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "是否启用改企业：0 - 禁用， 1 - 启用"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "ID"
+                  },
+                  "licenses": {
+                    "type": "string",
+                    "description": "证书链接，多个以逗号分割"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "description": "企业logo"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "公司名称"
+                  },
+                  "otherCategory": {
+                    "type": "string",
+                    "description": "所属行业为 '其他' 时用户填写信息， 0 - 128个字符"
+                  },
+                  "updateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "更新时间"
+                  },
+                  "userDefine": {
+                    "type": "boolean",
+                    "description": "用户自定义: 0 - 系统, 1  - 用户自定义域名"
+                  }
+                },
+                "title": "企业列表查询项目",
+                "$$ref": "#/definitions/企业列表查询项目"
+              }
+            },
+            "totalPage": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总页数"
+            },
+            "totalRows": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总记录数"
+            }
+          },
+          "title": "PageResult«企业列表查询项目»",
+          "$$ref": "#/definitions/PageResult«企业列表查询项目»"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«PageResult«企业列表查询项目»»",
+      "$$ref": "#/definitions/响应结果数据«PageResult«企业列表查询项目»»"
+    }
+  },
+  {
+    "name": "postCorpUpdate",
+    "title": "编辑企业",
+    "method": "POST",
+    "query_path": "/mc-api/v2/corp/update",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtycategory,\ncontractAddr,\ncontractEmail,\ncontractLeader,\ncontractTel,\nenabled,\nid,\nlicenses,\nlogo,\nname,\notherCategory,\nuserDefine,\n",
+        "map": {
+          "category": {
+            "required": "0",
+            "name": "category",
+            "type": "string",
+            "desc": "所属行业，如: 政企、社区物业、广告传媒、房地产开发、银行、医疗、零售、旅游、交通运输、公益组织、其他"
+          },
+          "contractAddr": {
+            "required": "0",
+            "name": "contractAddr",
+            "type": "string",
+            "desc": "联系地址"
+          },
+          "contractEmail": {
+            "required": "0",
+            "name": "contractEmail",
+            "type": "string",
+            "desc": "企业联系邮件"
+          },
+          "contractLeader": {
+            "required": "0",
+            "name": "contractLeader",
+            "type": "string",
+            "desc": "公司负责人"
+          },
+          "contractTel": {
+            "required": "0",
+            "name": "contractTel",
+            "type": "string",
+            "desc": "企业联系电话"
+          },
+          "enabled": {
+            "required": "0",
+            "name": "enabled",
+            "type": "boolean",
+            "desc": "是否启用改企业：0 - 禁用， 1 - 启用"
+          },
+          "id": {
+            "required": "0",
+            "name": "id",
+            "type": "string",
+            "desc": "ID"
+          },
+          "licenses": {
+            "required": "0",
+            "name": "licenses",
+            "type": "string",
+            "desc": "证书链接，多个以逗号分割"
+          },
+          "logo": {
+            "required": "0",
+            "name": "logo",
+            "type": "string",
+            "desc": "企业logo"
+          },
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "公司名称"
+          },
+          "otherCategory": {
+            "required": "0",
+            "name": "otherCategory",
+            "type": "string",
+            "desc": "所属行业为 '其他' 时用户填写信息， 0 - 128个字符"
+          },
+          "userDefine": {
+            "required": "0",
+            "name": "userDefine",
+            "type": "boolean",
+            "desc": "用户自定义: 0 - 系统, 1  - 用户自定义域名"
+          }
+        },
+        "paramsType": "category?:string,contractAddr?:string,contractEmail?:string,contractLeader?:string,contractTel?:string,enabled?:boolean,id?:string,licenses?:string,logo?:string,name?:string,otherCategory?:string,userDefine?:boolean,",
+        "desc": "* @param headers.category 所属行业，如: 政企、社区物业、广告传媒、房地产开发、银行、医疗、零售、旅游、交通运输、公益组织、其他\n* @param headers.contractAddr 联系地址\n* @param headers.contractEmail 企业联系邮件\n* @param headers.contractLeader 公司负责人\n* @param headers.contractTel 企业联系电话\n* @param headers.enabled 是否启用改企业：0 - 禁用， 1 - 启用\n* @param headers.id ID\n* @param headers.licenses 证书链接，多个以逗号分割\n* @param headers.logo 企业logo\n* @param headers.name 公司名称\n* @param headers.otherCategory 所属行业为 '其他' 时用户填写信息， 0 - 128个字符\n* @param headers.userDefine 用户自定义: 0 - 系统, 1  - 用户自定义域名\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  },
+  {
+    "name": "postBasicMobilecodeList",
+    "title": "列表查询",
+    "method": "POST",
+    "query_path": "/mc-api/v2/basic/mobile-code/list",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\"?:string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyorder,\npageNo,\npageSize,\nsort,\n",
+        "map": {
+          "order": {
+            "required": "0",
+            "name": "order",
+            "type": "string",
+            "desc": "排序方式, 例如: asc/desc"
+          },
+          "pageNo": {
+            "required": "0",
+            "name": "pageNo",
+            "type": "integer",
+            "desc": "第几页, 从1开始"
+          },
+          "pageSize": {
+            "required": "0",
+            "name": "pageSize",
+            "type": "integer",
+            "desc": "每页数量每页数量(1 ~ 1000)"
+          },
+          "sort": {
+            "required": "0",
+            "name": "sort",
+            "type": "string",
+            "desc": "排序字段, 例如: add_time"
+          }
+        },
+        "paramsType": "order?:string,pageNo?:number,pageSize?:number,sort?:string,",
+        "desc": "* @param headers.order 排序方式, 例如: asc/desc\n* @param headers.pageNo 第几页, 从1开始\n* @param headers.pageSize 每页数量每页数量(1 ~ 1000)\n* @param headers.sort 排序字段, 例如: add_time\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "pageNo": {
+              "type": "integer",
+              "format": "int32",
+              "description": "第几页"
+            },
+            "pageSize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "每页条数"
+            },
+            "rainbow": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "rows": {
+              "type": "array",
+              "description": "结果集",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "区号： 0086"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "nameEn": {
+                    "type": "string",
+                    "description": "英文名称"
+                  },
+                  "nameZhCn": {
+                    "type": "string",
+                    "description": "中文注释"
+                  },
+                  "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "排序"
+                  }
+                },
+                "title": "手机区域号码返回",
+                "$$ref": "#/definitions/手机区域号码返回"
+              }
+            },
+            "totalPage": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总页数"
+            },
+            "totalRows": {
+              "type": "integer",
+              "format": "int32",
+              "description": "总记录数"
+            }
+          },
+          "title": "PageResult«手机区域号码返回»",
+          "$$ref": "#/definitions/PageResult«手机区域号码返回»"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据«PageResult«手机区域号码返回»»",
+      "$$ref": "#/definitions/响应结果数据«PageResult«手机区域号码返回»»"
+    }
+  },
+  {
+    "name": "postAdminlogList",
+    "title": "管理人员操作记录列表查询",
+    "method": "POST",
+    "query_path": "/mc-api/v2/admin-log/list",
+    "req": {
+      "req_params": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_query": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_headers": {
+        "value": "",
+        "map": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "token"
+          }
+        ],
+        "paramsType": "\"Content-Type\":string,\"token\":string,",
+        "desc": "* @param headers.Content-Type defaultValue: application/json\n* @param headers.token defaultValue: undefined\n"
+      },
+      "req_body_form": {
+        "value": "emty",
+        "map": {},
+        "paramsType": "",
+        "desc": ""
+      },
+      "req_body_other": {
+        "value": "emtyname,\norder,\npageNo,\npageSize,\nsort,\n",
+        "map": {
+          "name": {
+            "required": "0",
+            "name": "name",
+            "type": "string",
+            "desc": "操作人员名称"
+          },
+          "order": {
+            "required": "0",
+            "name": "order",
+            "type": "string",
+            "desc": "排序方式, 例如: asc/desc"
+          },
+          "pageNo": {
+            "required": "0",
+            "name": "pageNo",
+            "type": "integer",
+            "desc": "第几页, 从1开始"
+          },
+          "pageSize": {
+            "required": "0",
+            "name": "pageSize",
+            "type": "integer",
+            "desc": "每页数量每页数量(1 ~ 1000)"
+          },
+          "sort": {
+            "required": "0",
+            "name": "sort",
+            "type": "string",
+            "desc": "排序字段, 例如: add_time"
+          }
+        },
+        "paramsType": "name?:string,order?:string,pageNo?:number,pageSize?:number,sort?:string,",
+        "desc": "* @param headers.name 操作人员名称\n* @param headers.order 排序方式, 例如: asc/desc\n* @param headers.pageNo 第几页, 从1开始\n* @param headers.pageSize 每页数量每页数量(1 ~ 1000)\n* @param headers.sort 排序字段, 例如: add_time\n"
+      },
+      "req_body_type": "json"
+    },
+    "res_body": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "响应状态码"
+        },
+        "data": {
+          "type": "object",
+          "description": "响应对象"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应信息"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        }
+      },
+      "title": "响应结果数据",
+      "$$ref": "#/definitions/响应结果数据"
+    }
+  }
+]

@@ -6,7 +6,6 @@ import * as https from "https";
 import { URL } from "url";
 import * as config from "./apiconfig.json";
 
-
 interface ParseBodyItem {
   items?: ParseBodyItem,
   properties?: {
@@ -65,15 +64,15 @@ interface JsonSchemaObject {
   /**
    * 数组模型
    */
-  items: JsonSchemaObject | string
+  items: JsonSchemaObject | string 
   /**
    * 备注
    */
-  description: string | null
+  description?: string | null
   /**
    * 定义属性
    */
-  properties: {
+  properties?: {
     [key in string]: JsonSchemaObject
   }
   /**
@@ -145,6 +144,7 @@ interface ApiParseValue {
 }
 
 let apiList:ApiParseValue[] = []
+let proBasepath:string = ''
 getYApiList()
 
 function getYApiList() {
@@ -160,7 +160,8 @@ function getYApiList() {
         _ctx = _ctx + data
     });
     res.on("end", function () {
-        // console.log('ctx :>> ', _ctx);
+        console.log('ctx :>> ', _ctx);
+        // fs.writeFileSync('./yapi.json', _ctx);
         startParse(JSON.parse(_ctx));
     })
     res.on('error',function (err) {
@@ -170,14 +171,16 @@ function getYApiList() {
   })
 }
 function startParse(jsonApiList: JsonApiList[]) {
+  
   if (jsonApiList.length > 0) {
     jsonApiList.forEach((api) => {
+      proBasepath = api.proBasepath
       api.list.forEach((item) => {
         let apiname =''
         let _map:{[key:string]:string}= config.yapiConfig.categoryMap
         let _title:string = _map[item.title]
         let _flag = new RegExp(/([A-Z]|[a-z])/);
-        if ( _title || _flag.test(item.title)) {
+        let _setApi = (item:JsonApi) => {
           let jsonApi = item
           apiname = _flag.test(item.title) ? item.title : _title
           if(jsonApi.res_body) {
@@ -200,8 +203,24 @@ function startParse(jsonApiList: JsonApiList[]) {
               res_body: model
             })
           }
+        }
+        if ( _title || _flag.test(item.title)) {
+          _setApi(item);
         } else  {
           console.log(`接口"${item.title}"缺少英文名称, path:${item.path}, query_method:${item.method}`);
+          let _defaultApiName = `${item.method.toLocaleLowerCase()}${(()=>{
+            let _name = ''
+            
+            item.path.replace(proBasepath, '').split('/').forEach((path)=>{
+              let _rex = new RegExp(/(\!|\-|\@|\#|\%|\&|\,|\_|\+|\?|\.)/g)
+              
+              let _path = path.replace(_rex, '');
+              _name += _path.slice(0,1).toUpperCase() + _path.slice(1).toLowerCase()
+            })
+            return _name;
+          })()}`
+          _title = _defaultApiName
+          _setApi(item);
         }
       })
     })
@@ -218,14 +237,13 @@ function creatApiListJS(apiList:ApiParseValue[]) {
     _apiListText += creatApi(api)
     _apiFuncList += `\t${api.name},\n`
   })
+  let _ISMOCK = config?.env?.ISMOCK ? config.env.ISMOCK : 'false'
+  let _MOCKURL = config?.env?.MOCKURL ? config.env.MOCKURL : ''
+  let _BACKSERVERURL = config?.env?.BACKSERVERURL ? config.env.BACKSERVERURL : ''
+
   let output = `
     import api from "${ config.axios.packageUrl }";
-    const host = \`\$\{ \(      
-      import.meta.env.VITE_isMock === 'true'
-        ? import.meta.env.VITE_mockUrl 
-        : import.meta.env.VITE_isProxy === 'true'
-            ? import.meta.env.VITE_proxyPath 
-            : import.meta.env.VITE_backServerUrl
+    const host = \`\$\{ \(${_ISMOCK} ? ${_MOCKURL} : ${_BACKSERVERURL}
       \)\}\`
     ${_apiListText}
 
@@ -296,15 +314,23 @@ function creatApi(api:ApiParseValue) {
   let isFormData = false
   let _headers = ''
   api.req.req_headers.map.forEach((item,index)=>{
-    if(index === api.req.req_headers.map.length - 1) {
-      _headers += `"${item.name}":"${item.value}"`
+    // 取出config中的headers
+    let _cfgHeaders = (config.headers as {[k in string]:string});
+    
+    // if(index === api.req.req_headers.map.length - 1) {
+    //   console.log('debug222', item.name, _cfgHeaders);
+    //   _headers += `"${item.name}":"${item.value}"`
+    // } else 
+    if(_cfgHeaders[item.name]) { //查找接口请求头中是否有config中设置的key
+      _headers += `"${item.name}": ${_cfgHeaders[item.name]},`
     } else {
       _headers += `"${item.name}":"${item.value}",`
     }
-    if(item.value.indexOf('x-www-form-urlencoded') > -1) {
+    if(item.value && item.value.indexOf('x-www-form-urlencoded') > -1) {
       isFormData = true
     }
   })
+
   let headers = `headers: {${_headers}}`
   let _newApiFunc = '';
   if(!isFormData){
@@ -354,7 +380,9 @@ function creatApiFuncDts(api:ApiParseValue) {
   //   ifReqDescription(api.req.req_headers, "req_headers")
   // }
   let _apiFuncDts = `
-    
+    /**
+     * ### ${api.title}
+     */
     export function ${api.name}(req:{
       ${
         ifReqDescription(api.req.req_params, "req_params")
@@ -531,9 +559,17 @@ function parseBodyOther(params:string) {
       }   
       //  参数类型合集
       _paramsType += _map[`${key}`].required === '1' // 参数类型合集(字符串)
-                        ? `${key}:${switchType(_properties[key])},`
-                        : `${key}?:${switchType(_properties[key])},`
-      _desc += `* @param headers.${key} ${_properties[key].description}\n` // 参数说明文本合集
+                        ? `
+                            /**
+                             * ${_properties[key].description}
+                             */
+                            ${key}:${switchType(_properties[key])},`
+                        : `
+                            /**
+                             * ${_properties[key].description}
+                             */
+                            ${key}?:${switchType(_properties[key])},`
+      _desc += `* @param req.${key} ${_properties[key].description}\n` // 参数说明文本合集
     })
   }
   
@@ -574,28 +610,42 @@ function parseResBodyItem(body:JsonSchemaObject) {
   let output = ''
   switch (body.type) {
     case "object":
-      Object.keys(body.properties).forEach((key) => {
-        let _itemType = body.properties[key].type
-        switch (_itemType) {
-          case 'object':
-            output += `${key}: { ${parseResBodyItem(body.properties[key])} } \n`
-            // output += `${key}:debug\n`
-            break;
-  
-          case 'array':
-            output += `${key}:${parseResBodyItem(body.properties[key])}[]\n`
-            // output += `${key}:debug\n`
-            break;
-          case 'integer':
-            output += `${key}:number\n`
-            
-            break;
-          default:
-            output += `${key}:${_itemType}\n`
-            
-            break;
+      try {
+        if(body?.properties) {
+          Object.keys(body.properties).forEach((key) => {
+            if (!body.properties) return;
+
+            let _itemType = body.properties[key].type
+            switch (_itemType) {
+              case 'object':
+                output += `${key}: ${body.properties[key]?.properties ? `{ ${parseResBodyItem(body.properties[key])} }`:'unknown'}\n`
+                // output += `${key}:debug\n`
+                break;
+      
+              case 'array':
+                output += `${key}:${parseResBodyItem(body.properties[key])}[]\n`
+                // output += `${key}:debug\n`
+                break;
+              case 'integer':
+                output += `${key}:number\n`
+                
+                break;
+              default:
+                output += `${key}:${_itemType}\n`
+                
+                break;
+            }
+          })
+        } else{
+          output += `unknown`
         }
-      })
+        
+        
+      } catch (error) {
+        console.log('error', body)
+        console.log(error);
+      }
+
       
       break;
     case "array":

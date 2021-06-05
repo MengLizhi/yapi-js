@@ -1,9 +1,8 @@
 {
   "yapiConfig": {
-    "url": "https://yapi.xiaofeituo.com/api/open/plugin/export-full?type=json&pid=7&status=all&token=85028dea54d827c1f2c6c1ddc6fa80d0fece3dfbb593cabe6afa4c2b4d6ccce3",
+    "url": "http://192.168.1.23:3000/api/open/plugin/export-full?type=json&pid=11&status=all&token=bc643f3343f2ad141cae4953975a6bf3e9ba61743351c9ab3f57a17b49cc8a9f",
     "categoryMap": {
-      "房间列表数据获取":"pullHouseList",
-      "编辑/添加房间":"pushHouseInfo"
+
     }
   },
   "file": {
@@ -11,7 +10,14 @@
     "outurl": "./dist"
   },
   "axios": {
-    "webPath": "https://yapi.xiaofeituo.com/mock/7", 
     "packageUrl": "../axios"
+  },
+  "headers": {
+    "token": "localStorage.getItem('token')"
+  },
+  "env": {
+    "ISMOCK": "",
+    "MOCKURL": "",
+    "BACKSERVERURL":""
   }
 }
