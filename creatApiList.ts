@@ -160,7 +160,7 @@ function getYApiList() {
         _ctx = _ctx + data
     });
     res.on("end", function () {
-        console.log('ctx :>> ', _ctx);
+        // console.log('ctx :>> ', _ctx);
         // fs.writeFileSync('./yapi.json', _ctx);
         startParse(JSON.parse(_ctx));
     })
@@ -179,7 +179,8 @@ function startParse(jsonApiList: JsonApiList[]) {
         let apiname =''
         let _map:{[key:string]:string}= config.yapiConfig.categoryMap
         let _title:string = _map[item.title]
-        let _flag = new RegExp(/([A-Z]|[a-z])/);
+        let _flag = new RegExp(/^([A-Z]|[a-z])+$/);
+        let _cn = new RegExp(/[\u4e00-\u9fa5]+/g);
         let _setApi = (item:JsonApi) => {
           let jsonApi = item
           apiname = _flag.test(item.title) ? item.title : _title
@@ -207,18 +208,19 @@ function startParse(jsonApiList: JsonApiList[]) {
         if ( _title || _flag.test(item.title)) {
           _setApi(item);
         } else  {
-          console.log(`接口"${item.title}"缺少英文名称, path:${item.path}, query_method:${item.method}`);
+          
           let _defaultApiName = `${item.method.toLocaleLowerCase()}${(()=>{
             let _name = ''
             
             item.path.replace(proBasepath, '').split('/').forEach((path)=>{
-              let _rex = new RegExp(/(\!|\-|\@|\#|\%|\&|\,|\_|\+|\?|\.)/g)
+              let _rex = new RegExp(/(\!|\-|\@|\#|\%|\&|\,|\_|\+|\?|\.|\{|\})/g)
               
               let _path = path.replace(_rex, '');
               _name += _path.slice(0,1).toUpperCase() + _path.slice(1).toLowerCase()
             })
             return _name;
           })()}`
+          console.log(`接口"${item.title}"正在使用默认英文名称(${_defaultApiName}), path:${item.path}, query_method:${item.method}`);
           _title = _defaultApiName
           _setApi(item);
         }
@@ -240,10 +242,14 @@ function creatApiListJS(apiList:ApiParseValue[]) {
   let _ISMOCK = config?.env?.ISMOCK ? config.env.ISMOCK : 'false'
   let _MOCKURL = config?.env?.MOCKURL ? config.env.MOCKURL : ''
   let _BACKSERVERURL = config?.env?.BACKSERVERURL ? config.env.BACKSERVERURL : ''
-
+  
   let output = `
+    /* eslint-disable */
     import api from "${ config.axios.packageUrl }";
-    const host = \`\$\{ \(${_ISMOCK} ? ${_MOCKURL} : ${_BACKSERVERURL}
+    const parseBol = (b) => {
+      return typeof b == 'string' ? !(/^(false|0)$/i).test(b) && !!b : b;
+    }
+    const host = \`\$\{ \(parseBol(${_ISMOCK}) ? ${_MOCKURL} : ${_BACKSERVERURL}
       \)\}\`
     ${_apiListText}
 
@@ -618,20 +624,36 @@ function parseResBodyItem(body:JsonSchemaObject) {
             let _itemType = body.properties[key].type
             switch (_itemType) {
               case 'object':
-                output += `${key}: ${body.properties[key]?.properties ? `{ ${parseResBodyItem(body.properties[key])} }`:'unknown'}\n`
+                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}: ${body.properties[key]?.properties ? `{ ${parseResBodyItem(body.properties[key])} }`:'unknown'}\n`
                 // output += `${key}:debug\n`
                 break;
       
               case 'array':
-                output += `${key}:${parseResBodyItem(body.properties[key])}[]\n`
+                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}:${parseResBodyItem(body.properties[key])}[]\n`
                 // output += `${key}:debug\n`
                 break;
               case 'integer':
-                output += `${key}:number\n`
+                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}:number\n`
                 
                 break;
               default:
-                output += `${key}:${_itemType}\n`
+                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}:${_itemType}\n`
                 
                 break;
             }

@@ -84,7 +84,6 @@ function startParse(jsonApiList) {
                     _setApi(item);
                 }
                 else {
-                    console.log(`接口"${item.title}"缺少英文名称, path:${item.path}, query_method:${item.method}`);
                     let _defaultApiName = `${item.method.toLocaleLowerCase()}${(() => {
                         let _name = '';
                         item.path.replace(proBasepath, '').split('/').forEach((path) => {
@@ -94,6 +93,7 @@ function startParse(jsonApiList) {
                         });
                         return _name;
                     })()}`;
+                    console.log(`接口"${item.title}"正在使用默认英文名称（${_defaultApiName}）, path:${item.path}, query_method:${item.method}`);
                     _title = _defaultApiName;
                     _setApi(item);
                 }
@@ -114,8 +114,12 @@ function creatApiListJS(apiList) {
     let _MOCKURL = config?.env?.MOCKURL ? config.env.MOCKURL : '';
     let _BACKSERVERURL = config?.env?.BACKSERVERURL ? config.env.BACKSERVERURL : '';
     let output = `
+    /* eslint-disable */
     import api from "${config.axios.packageUrl}";
-    const host = \`\$\{ \(${_ISMOCK} ? ${_MOCKURL} : ${_BACKSERVERURL}
+    const parseBol = (b) => {
+      return typeof b == 'string' ? !(/^(false|0)$/i).test(b) && !!b : b;
+    }
+    const host = \`\$\{ \(parseBol(${_ISMOCK}) ? ${_MOCKURL} : ${_BACKSERVERURL}
       \)\}\`
     ${_apiListText}
 
@@ -453,18 +457,34 @@ function parseResBodyItem(body) {
                         let _itemType = body.properties[key].type;
                         switch (_itemType) {
                             case 'object':
-                                output += `${key}: ${body.properties[key]?.properties ? `{ ${parseResBodyItem(body.properties[key])} }` : 'unknown'}\n`;
+                                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}: ${body.properties[key]?.properties ? `{ ${parseResBodyItem(body.properties[key])} }` : 'unknown'}\n`;
                                 // output += `${key}:debug\n`
                                 break;
                             case 'array':
-                                output += `${key}:${parseResBodyItem(body.properties[key])}[]\n`;
+                                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}:${parseResBodyItem(body.properties[key])}[]\n`;
                                 // output += `${key}:debug\n`
                                 break;
                             case 'integer':
-                                output += `${key}:number\n`;
+                                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}:number\n`;
                                 break;
                             default:
-                                output += `${key}:${_itemType}\n`;
+                                output += `
+                /**
+                 * ${body.properties[key].description}
+                 */
+                ${key}:${_itemType}\n`;
                                 break;
                         }
                     });
